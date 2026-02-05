@@ -1,40 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { buildEspnUrl } from "../api/espn.url";
+import { buildEspnUrl } from "../api/helpers/espnUrl";
 import { fetchJson } from "../api/helpers/fetchJson";
-import { EspnGameSummary, EspnSummaryResponse,  } from "../api/models/espn/summary";
+import { EspnGameSummaryApiResponse } from "../models/api/summary";
+import { GameSummaryViewModel } from "../models/ui/summary";
+import { mapSummaryToViewModel } from "../mappers/mapSummaryToViewModel";
 
 export function useGameSummary(
   sport: "basketball" | "football",
   league: "nba" | "nfl",
   eventId: string | null,
-  enabled: boolean
+  enabled: boolean,
 ) {
-  return useQuery<EspnGameSummary>({
+  return useQuery<GameSummaryViewModel>({
     queryKey: ["gameSummary", sport, league, eventId],
     enabled: enabled && !!eventId,
     queryFn: async () => {
       const url = buildEspnUrl(sport, league, "summary", eventId ?? "");
-      const data = await fetchJson<EspnSummaryResponse>(url);
-
-      const competition = data.header?.competitions?.[0];
-      const competitors = competition?.competitors ?? [];
-      const home = competitors.find((c) => c.homeAway === "home");
-      const away = competitors.find((c) => c.homeAway === "away");
-
-      return {
-        eventId: eventId ?? "",
-        title: data.header?.shortName ?? "Game details",
-        status: competition?.status?.type?.shortDetail ?? "N/A",
-        venue: data.gameInfo?.venue?.fullName,
-        date: competition?.date ?? data.header?.date,
-        homeTeam: home
-          ? { name: home.team.displayName, score: home.score ?? "-" }
-          : undefined,
-        awayTeam: away
-          ? { name: away.team.displayName, score: away.score ?? "-" }
-          : undefined,
-      };
+      const data = await fetchJson<EspnGameSummaryApiResponse>(url);
+      return mapSummaryToViewModel(data);
     },
+
     staleTime: 60_000,
     refetchOnWindowFocus: false,
     retry: 1,

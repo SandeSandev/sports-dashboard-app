@@ -3,11 +3,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type League = "nba" | "nfl";
 
 type LeagueState = {
-  league: League;
+  name: League;
 };
 
 const initialState: LeagueState = {
-  league: "nba",
+  name: "nba",
 };
 
 const leagueSlice = createSlice({
@@ -15,7 +15,7 @@ const leagueSlice = createSlice({
   initialState,
   reducers: {
     setLeague(state, action: PayloadAction<League>) {
-      state.league = action.payload;
+      state.name = action.payload;
     },
   },
 });

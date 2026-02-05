@@ -20,8 +20,10 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 
 import { dataProvider } from "./providers/data";
 import { queryClient } from "./providers/queryClient";
-import { Header } from "./components";
-import { Sidebar } from "./components/SideBar";
+import { Teams } from "./pages/teams/Teams";
+import { Overview } from "./pages/overview/Overview";
+import { Sidebar } from "./components/Sidebar";
+import { Header } from "./components/Header";
 
 function App() {
   return (
@@ -41,7 +43,7 @@ function App() {
                   reactQuery: { clientConfig: queryClient },
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
-                  projectId: "DUHrzK-A4rtNx-QyU3F0",
+                  projectId: process.env.REACT_APP_PROJECT_ID,
                 }}
               >
                 <Routes>
@@ -56,9 +58,8 @@ function App() {
                       </ThemedLayout>
                     }
                   >
-                    {/* TO DO IN NEXT STEPS */}
-                    {/* <Route index element={<Overview />} /> */}
-                    {/* <Route path="teams" element={<Teams />} /> */}
+                    <Route index element={<Overview />} />
+                    <Route path="teams" element={<Teams />} />
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                 </Routes>

@@ -49,7 +49,7 @@ export const Sidebar = () => {
           <ListItemIcon>
             <DashboardOutlined />
           </ListItemIcon>
-          {!collapsed && <ListItemText primary="Dashboard" />}
+          {!collapsed && <ListItemText primary="Overview" />}
         </ListItemButton>
 
         <ListItemButton

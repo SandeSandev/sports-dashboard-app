@@ -10,15 +10,13 @@ import React, { useContext } from "react";
 import { ColorModeContext } from "../contexts/color-mode";
 import { LeagueSelector } from "./LeagueSelector";
 
-export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
-  sticky = true,
-}) => {
+export const Header = ({ sticky = true }: RefineThemedLayoutHeaderProps) => {
   const { mode, setMode } = useContext(ColorModeContext);
 
   return (
     <AppBar
       position={sticky ? "sticky" : "relative"}
-      sx={{ backgroundColor: "#1d428a" }} 
+      sx={{ backgroundColor: "#1d428a" }}
     >
       <Toolbar>
         <Stack
@@ -37,7 +35,7 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
 
           {/* Right side */}
           <Stack direction="row" alignItems="center" gap={1}>
-            <LeagueSelector/>
+            <LeagueSelector />
             <IconButton color="inherit" onClick={setMode}>
               {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
             </IconButton>

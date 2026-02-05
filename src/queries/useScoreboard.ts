@@ -1,42 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  EspnScoreboardResponse,
-  EspnScoreboardResult,
-} from "../api/models/espn/scoreboard";
 import { fetchJson } from "../api/helpers/fetchJson";
-import { buildEspnUrl } from "../api/espn.url";
+import { buildEspnUrl } from "../api/helpers/espnUrl";
+import type { ScoreboardViewModel } from "../models/ui/scoreboard";
+import type { EspnScoreboardApiResponse } from "../models/api/scoreboard";
+import { mapScoreboardsToViewModel } from "../mappers/mapScoreboardToViewModel";
 
 export function useScoreboard(
   sport: "basketball" | "football",
   league: "nba" | "nfl",
 ) {
-  return useQuery<EspnScoreboardResult>({
+  return useQuery<ScoreboardViewModel>({
     queryKey: ["scoreboard", sport, league],
     queryFn: async () => {
       const url = buildEspnUrl(sport, league, "scoreboard");
-      const data = await fetchJson<EspnScoreboardResponse>(url);
+      const data = await fetchJson<EspnScoreboardApiResponse>(url);
 
-      const events =
-        data.events?.map((e) => {
-          const competitors = e.competitions?.[0]?.competitors ?? [];
-          const home = competitors.find((c) => c.homeAway === "home");
-          const away = competitors.find((c) => c.homeAway === "away");
-
-          return {
-            id: e.id,
-            status: e.status?.type?.shortDetail ?? "N/A",
-            homeTeam: {
-              name: home?.team.displayName ?? "Home",
-              score: home?.score ?? "-",
-            },
-            awayTeam: {
-              name: away?.team.displayName ?? "Away",
-              score: away?.score ?? "-",
-            },
-          };
-        }) ?? [];
-
-      return { events };
+      return mapScoreboardsToViewModel(data, league);
     },
     staleTime: 30_000,
     refetchOnWindowFocus: false,

@@ -1,9 +1,8 @@
+import { EspnEndpoint, EspnLeague, EspnSport } from "../../models/ui/scoreboard";
+
 export const ESPN_BASE_URL =
   'https://site.api.espn.com/apis/site/v2/sports';
 
-export type EspnSport = 'basketball' | 'football';
-export type EspnLeague = 'nba' | 'nfl';
-export type EspnEndpoint = 'scoreboard' | 'teams' | 'summary';
 
 export function buildEspnUrl(
   sport: EspnSport,
