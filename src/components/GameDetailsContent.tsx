@@ -25,14 +25,22 @@ export const GameDetailsContent = ({
   error,
 }: GameDetailsContentProps) => {
   if (!eventId) return <Typography>Select a game</Typography>;
+
   if (isLoading)
     return (
-      <Box display="flex" justifyContent="center" alignItems="center" minHeight={180}>
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        minHeight={180}
+      >
         <CircularProgress />
       </Box>
     );
+
   if (error)
     return <Alert severity="error">Failed to load game details.</Alert>;
+
   if (!data) return <Typography>No details available.</Typography>;
 
   return (
@@ -46,9 +54,7 @@ export const GameDetailsContent = ({
               {data.venue ? ` • ${data.venue}` : ""}
             </Typography>
           </Box>
-
           <Divider />
-
           {[data.away, data.home].map((t) => (
             <Stack
               key={t.abbr}
@@ -61,7 +67,6 @@ export const GameDetailsContent = ({
                 <Avatar src={t.logo} alt={t.abbr} />
                 <Typography variant="subtitle1">{t.name}</Typography>
               </Stack>
-
               <Typography variant="h5">{t.score ?? "—"}</Typography>
             </Stack>
           ))}

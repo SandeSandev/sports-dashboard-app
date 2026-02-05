@@ -1,11 +1,11 @@
 import { EspnScoreboardApiResponse } from "../models/api/scoreboard";
-import { EspnLeague } from "../models/ui/scoreboard";
+import { EspnLeague, LeagueLabel } from "../models/ui/scoreboard";
 
 export const mapScoreboardsToViewModel = (
   data: EspnScoreboardApiResponse,
   league: EspnLeague,
 ) => {
-  const leagueLabel: "NBA" | "NFL" = league === "nba" ? "NBA" : "NFL";
+  const leagueLabel: LeagueLabel= league === "nba" ? "NBA" : "NFL";
   const title =
     league === "nfl"
       ? `NFL — Week ${data.week?.number ?? "—"}`
@@ -24,7 +24,6 @@ export const mapScoreboardsToViewModel = (
         id: e.id,
         status,
         venue: comp?.venue?.fullName,
-
         away: {
           abbr: away?.team.abbreviation ?? "AWAY",
           name: away?.team.displayName ?? "Away",
@@ -32,7 +31,6 @@ export const mapScoreboardsToViewModel = (
           score: away?.score ? Number(away.score) : undefined,
           isWinner: away?.winner,
         },
-
         home: {
           abbr: home?.team.abbreviation ?? "HOME",
           name: home?.team.displayName ?? "Home",

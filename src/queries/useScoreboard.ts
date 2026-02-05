@@ -1,16 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import { fetchJson } from "../api/helpers/fetchJson";
 import { buildEspnUrl } from "../api/helpers/espnUrl";
-import type { ScoreboardViewModel } from "../models/ui/scoreboard";
+import type {
+  EspnLeague,
+  EspnSport,
+  ScoreboardViewModel,
+} from "../models/ui/scoreboard";
 import type { EspnScoreboardApiResponse } from "../models/api/scoreboard";
 import { mapScoreboardsToViewModel } from "../mappers/mapScoreboardToViewModel";
 
-export function useScoreboard(
-  sport: "basketball" | "football",
-  league: "nba" | "nfl",
-) {
+export const SCOREBOARD_QUERY_KEY = "scoreboard";
+
+export function useScoreboard(sport: EspnSport, league: EspnLeague) {
   return useQuery<ScoreboardViewModel>({
-    queryKey: ["scoreboard", sport, league],
+    queryKey: [SCOREBOARD_QUERY_KEY, sport, league],
     queryFn: async () => {
       const url = buildEspnUrl(sport, league, "scoreboard");
       const data = await fetchJson<EspnScoreboardApiResponse>(url);

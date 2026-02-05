@@ -23,7 +23,6 @@ export const LeagueSelector = () => {
       >
         League
       </InputLabel>
-
       <Select
         labelId="league-label"
         label="League"

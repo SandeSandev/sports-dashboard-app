@@ -1,9 +1,10 @@
-export type EspnSport = 'basketball' | 'football';
-export type EspnLeague = 'nba' | 'nfl';
-export type EspnEndpoint = 'scoreboard' | 'teams' | 'summary';
+export type EspnSport = "basketball" | "football";
+export type EspnLeague = "nba" | "nfl";
+export type LeagueLabel = "NBA" | "NFL";
+export type EspnEndpoint = "scoreboard" | "teams" | "summary";
 
 export interface ScoreboardViewModel {
-  league: "NBA" | "NFL";
+  league: LeagueLabel;
   title: string; // "NBA — Today" | "NFL — Week 5"
   games: ScoreboardGameViewModel[];
 }

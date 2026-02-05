@@ -40,7 +40,6 @@ export const Sidebar = () => {
           {collapsed ? <ChevronRight /> : <ChevronLeft />}
         </IconButton>
       </Box>
-
       <List>
         <ListItemButton
           selected={location.pathname === "/"}

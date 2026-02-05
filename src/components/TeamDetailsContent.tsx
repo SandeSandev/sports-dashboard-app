@@ -13,7 +13,6 @@ export const TeamDetailsContent = ({ team }: TeamDetailsContentProps) => {
   return (
     <Stack spacing={2} alignItems="center" textAlign="center">
       <Avatar src={team.logo} alt={team.abbr} sx={{ width: 64, height: 64 }} />
-
       <Box>
         <Typography variant="h6" fontWeight={700}>
           {team.name}

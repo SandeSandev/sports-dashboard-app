@@ -1,11 +1,12 @@
 import type { EspnTeamsApiResponse } from "../models/api/teams";
+import { EspnLeague, LeagueLabel } from "../models/ui/scoreboard";
 import type { TeamsViewModel } from "../models/ui/teams";
 
 export const mapTeamsToViewModel = (
   api: EspnTeamsApiResponse,
-  league: "nba" | "nfl"
+  league: EspnLeague
 ): TeamsViewModel => {
-  const leagueLabel: "NBA" | "NFL" = league === "nba" ? "NBA" : "NFL";
+  const leagueLabel: LeagueLabel = league === "nba" ? "NBA" : "NFL";
 
   const teams =
     api.sports?.[0]?.leagues?.[0]?.teams?.map((t) => {
