@@ -43,7 +43,7 @@ function App() {
                   reactQuery: { clientConfig: queryClient },
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
-                  projectId: process.env.REACT_APP_PROJECT_ID,
+                  projectId: import.meta.env.VITE_PROJECT_ID,
                 }}
               >
                 <Routes>

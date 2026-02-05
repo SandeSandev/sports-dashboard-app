@@ -1,43 +1,51 @@
-# sports-dashboard-app
 
-<div align="center" style="margin: 30px;">
-    <a href="https://refine.dev">
-    <img alt="refine logo" src="https://refine.ams3.cdn.digitaloceanspaces.com/readme/refine-readme-banner.png">
-    </a>
-</div>
-<br/>
+# Sports Dashboard App
 
-This [Refine](https://github.com/refinedev/refine) project was generated with [create refine-app](https://github.com/refinedev/refine/tree/master/packages/create-refine-app).
+A web application for viewing sports scores, team details, and game summaries using public APIs (no API key required).
 
-## Getting Started
+## Setup Instructions
 
-A React Framework for building internal tools, admin panels, dashboards & B2B apps with unmatched flexibility ✨
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Start the development server:**
+   ```bash
+   npm run dev
+   ```
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
+4. **Preview production build:**
+   ```bash
+   npm run preview
+   ```
 
-Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
+## Run Instructions
 
-## Available Scripts
+- After running `npm run dev`, open your browser and navigate to `http://localhost:5173` (or the port shown in your terminal).
+- Use the sidebar to select leagues and view scoreboards, game details, and team information.
 
-### Running the development server.
+## Architecture Notes
 
-```bash
-    npm run dev
-```
+- **Frontend:** Built with React and TypeScript, using Vite for fast development and builds.
+- **State Management:** Uses React Context and Redux Toolkit for global state (e.g., league selection).
+- **Data Fetching:** Utilizes React Query for API calls and caching.
+- **Components:** Modular structure with reusable components for games, teams, modals, and selectors.
+- **API Layer:** All API requests are made to public endpoints; no authentication or API key is required.
+- **Styling:** Custom styles and color mode context for light/dark themes.
 
-### Building for production.
+## Assumptions
 
-```bash
-    npm run build
-```
+- The app uses only public sports APIs that do not require authentication.
+- API usage is subject to provider limits; please use responsibly.
+- The app is intended for desktop browsers and may not be fully optimized for mobile devices.
+- No sensitive or personal data is stored or processed.
 
-### Running the production server.
+---
 
-```bash
-    npm run start
-```
-
-## Learn More
-
-To learn more about **Refine**, please check out the [Documentation](https://refine.dev/docs)
+**Note:** This app uses public APIs without a key. Please respect the API provider’s terms and avoid excessive requests.
 
 - **REST Data Provider** [Docs](https://refine.dev/docs/core/providers/data-provider/#overview)
 - **Material UI** [Docs](https://refine.dev/docs/ui-frameworks/mui/tutorial/)
