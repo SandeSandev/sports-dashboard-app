@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import { RefineThemedLayoutHeaderProps } from "@refinedev/mui";
 import React, { useContext } from "react";
 import { ColorModeContext } from "../contexts/color-mode";
+import { LeagueSelector } from "./LeagueSelector";
 
 export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
   sticky = true,
@@ -36,6 +37,7 @@ export const Header: React.FC<RefineThemedLayoutHeaderProps> = ({
 
           {/* Right side */}
           <Stack direction="row" alignItems="center" gap={1}>
+            <LeagueSelector/>
             <IconButton color="inherit" onClick={setMode}>
               {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
             </IconButton>
