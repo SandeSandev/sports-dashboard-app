@@ -15,7 +15,7 @@ import { DetailsModal } from "../../components/DetailsModal";
 import { GameRow } from "../../components/GameRow";
 import { TeamDetailsContent } from "../../components/TeamDetailsContent";
 
-export const Teams = () => {
+const Teams = () => {
   const [selectedTeamId, setSelectedTeamId] = useState<string | null>(null);
 
   const league = useAppSelector((s) => s.league.name); // "nba" | "nfl"
@@ -80,3 +80,5 @@ export const Teams = () => {
     </>
   );
 };
+
+export default Teams;

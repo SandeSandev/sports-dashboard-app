@@ -20,10 +20,12 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 
 import { dataProvider } from "./providers/data";
 import { queryClient } from "./providers/queryClient";
-import { Teams } from "./pages/teams/Teams";
-import { Overview } from "./pages/overview/Overview";
+import React, { Suspense, lazy } from "react";
+const Teams = lazy(() => import("./pages/teams/Teams"));
+const Overview = lazy(() => import("./pages/overview/Overview"));
 import { Sidebar } from "./components/Sidebar";
 import { Header } from "./components/Header";
+import { CircularProgress } from "@mui/material";
 
 function App() {
   return (
@@ -58,8 +60,16 @@ function App() {
                       </ThemedLayout>
                     }
                   >
-                    <Route index element={<Overview />} />
-                    <Route path="teams" element={<Teams />} />
+                    <Route index element={
+                      <Suspense fallback={<CircularProgress />}>
+                        <Overview />
+                      </Suspense>
+                    } />
+                    <Route path="teams" element={
+                      <Suspense fallback={<CircularProgress />}>
+                        <Teams />
+                      </Suspense>
+                    } />
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                 </Routes>
