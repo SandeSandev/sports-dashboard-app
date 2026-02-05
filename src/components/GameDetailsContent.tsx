@@ -25,7 +25,12 @@ export const GameDetailsContent = ({
   error,
 }: GameDetailsContentProps) => {
   if (!eventId) return <Typography>Select a game</Typography>;
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight={180}>
+        <CircularProgress />
+      </Box>
+    );
   if (error)
     return <Alert severity="error">Failed to load game details.</Alert>;
   if (!data) return <Typography>No details available.</Typography>;

@@ -16,7 +16,6 @@ export const DetailsModal = ({
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
       {title && <DialogTitle>{title}</DialogTitle>}
-
       <DialogContent>
         <Box>{children}</Box>
       </DialogContent>
