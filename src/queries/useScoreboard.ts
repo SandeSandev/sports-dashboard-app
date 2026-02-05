@@ -4,6 +4,7 @@ import {
   EspnScoreboardResult,
 } from "../api/models/espn/scoreboard";
 import { fetchJson } from "../api/helpers/fetchJson";
+import { buildEspnUrl } from "../api/espn.url";
 
 export function useScoreboard(
   sport: "basketball" | "football",
@@ -12,7 +13,7 @@ export function useScoreboard(
   return useQuery<EspnScoreboardResult>({
     queryKey: ["scoreboard", sport, league],
     queryFn: async () => {
-      const url = `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/scoreboard`;
+      const url = buildEspnUrl(sport, league, "scoreboard");
       const data = await fetchJson<EspnScoreboardResponse>(url);
 
       const events =

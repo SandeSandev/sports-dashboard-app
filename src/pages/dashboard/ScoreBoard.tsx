@@ -8,8 +8,11 @@ import {
   ListItemText,
   Typography,
 } from "@mui/material";
+import { useGameSummary } from "../../queries/useGameSummary";
 import { useScoreboard } from "../../queries/useScoreboard";
 import { useAppSelector } from "../../store/hooks/useAppSelector";
+import { DetailsDrawer } from "../../components/DetailsDrawer";
+import { GameDetailsContent } from "../../components/GameDetailsContent";
 
 export const ScoreBoard = () => {
   const league = useAppSelector((s) => s.league.league);
@@ -18,6 +21,9 @@ export const ScoreBoard = () => {
   const scoreboardQuery = useScoreboard(sport, league);
 
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  const open = !!selectedEventId;
+
+  const summaryQuery = useGameSummary(sport, league, selectedEventId, open);
 
   if (scoreboardQuery.isLoading) {
     return (
@@ -53,6 +59,19 @@ export const ScoreBoard = () => {
           </ListItem>
         ))}
       </List>
+
+      <DetailsDrawer
+        open={open}
+        title="Game details"
+        onClose={() => setSelectedEventId(null)}
+      >
+        <GameDetailsContent
+          eventId={selectedEventId}
+          data={summaryQuery.data}
+          isLoading={summaryQuery.isLoading}
+          error={summaryQuery.error}
+        />
+      </DetailsDrawer>
     </>
   );
 };
