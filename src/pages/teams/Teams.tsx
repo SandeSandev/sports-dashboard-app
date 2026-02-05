@@ -1,4 +1,3 @@
-// src/features/teams/Teams.tsx (или където ти е удобно)
 import { useMemo, useState } from "react";
 import {
   Alert,
@@ -35,7 +34,7 @@ const Teams = () => {
 
   if (isLoadingTeamsData) {
     return (
-      <Box display="flex" justifyContent="center" py={4}>
+      <Box display="flex" justifyContent="center" py={20}>
         <CircularProgress />
       </Box>
     );

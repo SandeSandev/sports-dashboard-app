@@ -40,7 +40,7 @@ export const ScoreBoard = () => {
 
   if (isLoadingScoreBoardData) {
     return (
-      <Box display="flex" justifyContent="center" py={4}>
+      <Box display="flex" justifyContent="center" py={20}>
         <CircularProgress />
       </Box>
     );

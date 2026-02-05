@@ -13,11 +13,8 @@ import {
 } from "@refinedev/mui";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
-
 import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
-import { Box, CircularProgress } from "@mui/material";
-
 import { ColorModeContextProvider } from "./contexts/color-mode";
 import { dataProvider } from "./providers/data";
 import { queryClient } from "./providers/queryClient";
@@ -27,15 +24,10 @@ import { Header } from "./components/Header";
 const Teams = lazy(() => import("./pages/teams/Teams"));
 const Overview = lazy(() => import("./pages/overview/Overview"));
 
-const Loading = () => (
-  <Box display="flex" justifyContent="center" py={6}>
-    <CircularProgress />
-  </Box>
-);
 
 const Layout = () => (
   <ThemedLayout Title={() => null} Header={() => <Header sticky />} Sider={Sidebar}>
-    <Suspense fallback={<Loading />}>
+    <Suspense fallback={null}>
       <Outlet />
     </Suspense>
   </ThemedLayout>
