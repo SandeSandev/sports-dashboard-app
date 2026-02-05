@@ -1,4 +1,4 @@
-import { GitHubBanner, Refine } from "@refinedev/core";
+import { Refine } from "@refinedev/core";
 import { DevtoolsPanel, DevtoolsProvider } from "@refinedev/devtools";
 import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 
@@ -13,30 +13,19 @@ import CssBaseline from "@mui/material/CssBaseline";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import routerProvider, {
   DocumentTitleHandler,
-  NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+
 import { dataProvider } from "./providers/data";
+import { queryClient } from "./providers/queryClient";
+import { Header } from "./components";
+import { Sidebar } from "./components/SideBar";
 
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -47,29 +36,9 @@ function App() {
                 dataProvider={dataProvider}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
-                resources={[
-                  {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                  {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
-                  },
-                ]}
+                resources={[{ name: "teams", list: "/teams" }]}
                 options={{
+                  reactQuery: { clientConfig: queryClient },
                   syncWithLocation: true,
                   warnWhenUnsavedChanges: true,
                   projectId: "DUHrzK-A4rtNx-QyU3F0",
@@ -78,27 +47,18 @@ function App() {
                 <Routes>
                   <Route
                     element={
-                      <ThemedLayout Header={() => <Header sticky />}>
+                      <ThemedLayout
+                        Title={() => null}
+                        Header={() => <Header sticky />}
+                        Sider={() => <Sidebar />}
+                      >
                         <Outlet />
                       </ThemedLayout>
                     }
                   >
-                    <Route
-                      index
-                      element={<NavigateToResource resource="blog_posts" />}
-                    />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
-                    </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
-                    </Route>
+                    {/* TO DO IN NEXT STEPS */}
+                    {/* <Route index element={<Overview />} /> */}
+                    {/* <Route path="teams" element={<Teams />} /> */}
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                 </Routes>
